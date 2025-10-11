@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "tipo": "Seguridad",
+    "emoji": "🚨",
+    "color": "#DC2626",
+    "descripcion": "Robo reportado en la zona.",
+    "fecha": "2025-10-10 14:35",
+    "lat": 4.6486,
+    "lng": -74.2479
+  },
+  {
+    "id": 2,
+    "tipo": "Infraestructura",
+    "emoji": "🏗️",
+    "color": "#FACC15",
+    "descripcion": "Hueco grande en la vía principal.",
+    "fecha": "2025-10-10 15:10",
+    "lat": 4.6513,
+    "lng": -74.1056
+  },
+  {
+    "id": 3,
+    "tipo": "Limpieza",
+    "emoji": "🧹",
+    "color": "#16A34A",
+    "descripcion": "Acumulación de basura en el parque.",
+    "fecha": "2025-10-10 16:20",
+    "lat": 4.6097,
+    "lng": -74.0817
+  }
+]

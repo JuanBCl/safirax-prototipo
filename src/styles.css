@@ -1,0 +1,123 @@
+:root[data-theme="light"] {
+  --bg: #ffffff;
+  --bg-secondary: #E0F2FE;
+  --text: #1f2937;
+  --primary: #1e3a8a;
+  --secondary: #2563EB;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-secondary: #1E293B;
+  --text: #f8fafc;
+  --primary: #60a5fa;
+  --secondary: #3B82F6;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%;margin:0;padding:0;font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);}
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.map-container {
+  flex: 3;
+}
+
+/* Map wrapper to keep map full height */
+.map-container .leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Form area */
+.report-form {
+  flex: 1;
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-left: 2px solid var(--primary);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.06);
+  min-width: 320px;
+}
+
+.report-form h2 {
+  color: var(--primary);
+  margin-top: 0;
+}
+
+.report-form label {
+  font-weight: 600;
+}
+
+.report-form select,
+.report-form textarea {
+  padding: 8px;
+  border: 1px solid rgba(31,41,55,0.12);
+  border-radius: 6px;
+  resize: none;
+  font-family: inherit;
+}
+
+.report-form button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 600;
+}
+
+.report-form button:hover {
+  background: var(--secondary);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: 1000;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  font-weight: 500;
+  animation: fadeInOut 3s ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(10px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+/* Responsive */
+@media (max-width:900px){
+  .app-layout { flex-direction: column; }
+  .report-form { min-width: auto; width: 100%; border-left: none; border-top: 2px solid var(--primary); }
+  .theme-toggle { top: 10px; right: 10px; }
+}
