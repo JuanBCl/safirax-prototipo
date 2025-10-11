@@ -1,32 +1,82 @@
 [
   {
     "id": 1,
-    "tipo": "Seguridad",
-    "emoji": "🚨",
-    "color": "#DC2626",
-    "descripcion": "Robo reportado en la zona.",
-    "fecha": "2025-10-10 14:35",
-    "lat": 4.6486,
-    "lng": -74.2479
+    "type": "robo",
+    "description": "Robo a mano armada en un local comercial",
+    "lat": 4.711,
+    "lng": -74.0721,
+    "timestamp": "2025-10-11T18:30:00Z"
   },
   {
     "id": 2,
-    "tipo": "Infraestructura",
-    "emoji": "🏗️",
-    "color": "#FACC15",
-    "descripcion": "Hueco grande en la vía principal.",
-    "fecha": "2025-10-10 15:10",
-    "lat": 4.6513,
-    "lng": -74.1056
+    "type": "accidente",
+    "description": "Choque entre dos vehículos particulares",
+    "lat": 4.7135,
+    "lng": -74.0702,
+    "timestamp": "2025-10-11T19:10:00Z"
   },
   {
     "id": 3,
-    "tipo": "Limpieza",
-    "emoji": "🧹",
-    "color": "#16A34A",
-    "descripcion": "Acumulación de basura en el parque.",
-    "fecha": "2025-10-10 16:20",
-    "lat": 4.6097,
-    "lng": -74.0817
+    "type": "emergencia médica",
+    "description": "Persona desmayada en vía pública, ambulancia en camino",
+    "lat": 4.7103,
+    "lng": -74.0748,
+    "timestamp": "2025-10-11T19:45:00Z"
+  },
+  {
+    "id": 4,
+    "type": "incendio",
+    "description": "Incendio controlado en un establecimiento de comida",
+    "lat": 4.7098,
+    "lng": -74.0693,
+    "timestamp": "2025-10-11T20:05:00Z"
+  },
+  {
+    "id": 5,
+    "type": "vandalismo",
+    "description": "Pintadas y daños a infraestructura pública",
+    "lat": 4.7121,
+    "lng": -74.0735,
+    "timestamp": "2025-10-11T20:20:00Z"
+  },
+  {
+    "id": 6,
+    "type": "hurto de vehículo",
+    "description": "Motocicleta reportada como robada",
+    "lat": 4.7142,
+    "lng": -74.0717,
+    "timestamp": "2025-10-11T20:45:00Z"
+  },
+  {
+    "id": 7,
+    "type": "manifestación",
+    "description": "Concentración pacífica en la vía principal",
+    "lat": 4.7156,
+    "lng": -74.0689,
+    "timestamp": "2025-10-11T21:10:00Z"
+  },
+  {
+    "id": 8,
+    "type": "desastre natural",
+    "description": "Inundación leve por lluvias intensas",
+    "lat": 4.713,
+    "lng": -74.075,
+    "timestamp": "2025-10-11T21:30:00Z"
+  },
+  {
+    "id": 9,
+    "type": "ruido excesivo",
+    "description": "Fiesta con alto volumen reportada por vecinos",
+    "lat": 4.7107,
+    "lng": -74.0708,
+    "timestamp": "2025-10-11T21:55:00Z"
+  },
+  {
+    "id": 10,
+    "type": "seguridad",
+    "description": "Persona sospechosa merodeando en zona residencial",
+    "lat": 4.7095,
+    "lng": -74.0731,
+    "timestamp": "2025-10-11T22:15:00Z"
   }
 ]

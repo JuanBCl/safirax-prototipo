@@ -1,70 +1,144 @@
 import { useState } from "react";
 
 export default function ReportForm({ onAddReport }) {
-  const [tipo, setTipo] = useState("Seguridad");
-  const [descripcion, setDescripcion] = useState("");
+  const [type, setType] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [loadingLocation, setLoadingLocation] = useState(false);
 
-  const tipos = {
-    Seguridad: { emoji: "🚨", color: "#DC2626" },
-    Infraestructura: { emoji: "🏗️", color: "#FACC15" },
-    Limpieza: { emoji: "🧹", color: "#16A34A" },
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setImage(file);
+      setPreviewUrl(URL.createObjectURL(file)); // 👈 Vista previa de la imagen
+    } else {
+      setImage(null);
+      setPreviewUrl(null);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!descripcion) {
-      alert("Agrega una descripción");
+    if (!type || !description) {
+      alert("Por favor completa todos los campos obligatorios.");
       return;
     }
 
-    if (!navigator.geolocation) {
-      alert("Tu navegador no soporta geolocalización");
-      return;
-    }
+    setLoadingLocation(true);
 
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        const nuevoReporte = {
+      (position) => {
+        const { latitude, longitude } = position.coords;
+
+        const newReport = {
           id: Date.now(),
-          tipo,
-          emoji: tipos[tipo].emoji,
-          color: tipos[tipo].color,
-          descripcion,
-          fecha: new Date().toLocaleString(),
+          type,
+          description,
           lat: latitude,
           lng: longitude,
+          timestamp: new Date().toISOString(),
+          image: previewUrl || null,
         };
-        onAddReport(nuevoReporte);
-        setDescripcion("");
+
+        onAddReport(newReport);
+
+        // 🧹 Limpiar formulario
+        setType("");
+        setDescription("");
+        setImage(null);
+        setPreviewUrl(null);
+        setLoadingLocation(false);
       },
-      () => alert("No se pudo obtener la ubicación. Verifica permisos.")
+      (error) => {
+        console.error("Error al obtener ubicación:", error);
+        alert("No se pudo obtener la ubicación.");
+        setLoadingLocation(false);
+      }
     );
   };
 
   return (
-    <form className="report-form" onSubmit={handleSubmit}>
-      <h2>📋 Reportar incidente</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 mt-4 max-w-md mx-auto border border-gray-200 dark:border-gray-700"
+    >
+      <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
+        📢 Reportar incidente
+      </h2>
 
-      <label>Tipo de incidente</label>
-      <select value={tipo} onChange={(e) => setTipo(e.target.value)}>
-        {Object.keys(tipos).map((t) => (
-          <option key={t} value={t}>
-            {t}
-          </option>
-        ))}
-      </select>
+      {/* Tipo de incidente */}
+      <div className="mb-3">
+        <label className="block text-gray-700 dark:text-gray-300 mb-1">
+          Tipo de incidente *
+        </label>
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+          className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          required
+        >
+          <option value="">Seleccionar tipo</option>
+          <option value="robo">🚨 Robo</option>
+          <option value="vandalismo">⚠️ Vandalismo</option>
+          <option value="accidente">🚗 Accidente</option>
+          <option value="desastre natural">🌪️ Desastre natural</option>
+        </select>
+      </div>
 
-      <label>Descripción</label>
-      <textarea
-        value={descripcion}
-        onChange={(e) => setDescripcion(e.target.value)}
-        placeholder="Describe brevemente lo sucedido..."
-        required
-      ></textarea>
+      {/* Descripción */}
+      <div className="mb-3">
+        <label className="block text-gray-700 dark:text-gray-300 mb-1">
+          Descripción *
+        </label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+          rows="3"
+          placeholder="Describe lo ocurrido..."
+          required
+        />
+      </div>
 
-      <button type="submit">Enviar reporte</button>
+      {/* Subir imagen */}
+      <div className="mb-3">
+        <label className="block text-gray-700 dark:text-gray-300 mb-1">
+          Imagen (opcional)
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="w-full text-gray-700 dark:text-gray-300"
+        />
+
+        {/* 📸 Vista previa */}
+        {previewUrl && (
+          <div className="mt-3">
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">
+              Vista previa:
+            </p>
+            <img
+              src={previewUrl}
+              alt="Vista previa"
+              className="max-h-48 rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Botón de enviar */}
+      <button
+        type="submit"
+        disabled={loadingLocation}
+        className={`w-full py-2 rounded text-white font-semibold ${
+          loadingLocation ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"
+        }`}
+      >
+        {loadingLocation ? "Obteniendo ubicación..." : "📨 Enviar reporte"}
+      </button>
     </form>
   );
 }

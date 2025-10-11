@@ -3,6 +3,7 @@ import MapView from "./components/MapView";
 import ReportForm from "./components/ReportForm";
 import ThemeToggle from "./components/ThemeToggle";
 import Toast from "./components/Toast";
+import Header from "./components/Header";
 import "./styles.css";
 
 function App() {
@@ -23,11 +24,18 @@ function App() {
 
   return (
     <div>
+      {/* 🧭 Nuevo header con botón de inicio */}
+      <Header />
+
+      {/* 🌓 Tema oscuro */}
       <ThemeToggle />
+
+      {/* 🗺️ Layout principal */}
       <div className="app-layout">
         <MapView reports={reports} />
         <ReportForm onAddReport={handleAddReport} />
       </div>
+
       {toastMsg && <Toast message={toastMsg} onClose={() => setToastMsg("")} />}
     </div>
   );
