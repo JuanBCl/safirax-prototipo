@@ -26,6 +26,20 @@ function Home() {
         >
           Ver Mapa
         </button>
+        <button
+          onClick={() => navigate("/login")}
+          className="bg-[#1E3A8A] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#2563EB] transition"
+        >
+          Iniciar Sesión
+        </button>
+
+        <button
+          onClick={() => navigate("/register")}
+          className="bg-white text-[#1E3A8A] border border-[#2563EB] px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#E0F2FE] transition"
+        >
+          Registrarse
+        </button>
+
       </div>
 
       {/* Footer */}

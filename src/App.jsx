@@ -2,61 +2,60 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import MapView from "./components/MapView";
 import ReportForm from "./components/ReportForm";
-import ThemeToggle from "./components/ThemeToggle";
-import Toast from "./components/Toast";
 import Header from "./components/Header";
-import EntityPanel from "./components/EntityPanel"; // 👈 importante
+import EntityPanel from "./components/EntityPanel";
+import { Toaster } from "react-hot-toast"; // 👈 importamos el Toaster global
 import "./styles.css";
 
 function App() {
   const [reports, setReports] = useState([]);
-  const [toastMsg, setToastMsg] = useState("");
 
+  // 📥 Cargar reportes guardados
   useEffect(() => {
-  const stored = localStorage.getItem("reports");
-  if (stored) {
-    setReports(JSON.parse(stored));
-  } else {
-    fetch("/reports.json")
-      .then((res) => res.json())
-      .then(setReports)
-      .catch((err) => console.error("Error cargando reportes:", err));
-  }
-}, []);
+    const stored = localStorage.getItem("reports");
+    if (stored) {
+      setReports(JSON.parse(stored));
+    } else {
+      fetch("/reports.json")
+        .then((res) => res.json())
+        .then(setReports)
+        .catch((err) => console.error("Error cargando reportes:", err));
+    }
+  }, []);
 
-
+  // 📝 Guardar nuevos reportes
   const handleAddReport = (newReport) => {
-  const updatedReports = [...reports, newReport];
-  setReports(updatedReports);
+    const updatedReports = [...reports, newReport];
+    setReports(updatedReports);
+    localStorage.setItem("reports", JSON.stringify(updatedReports));
 
-  // ✅ Guardar también en localStorage
-  localStorage.setItem("reports", JSON.stringify(updatedReports));
-
-  setToastMsg("✅ Reporte enviado correctamente");
-};
-
+    // ✅ Mostrar notificación
+    import("react-hot-toast").then(({ toast }) =>
+      toast.success("✅ Reporte enviado correctamente")
+    );
+  };
 
   return (
-    <div>
-      <Header />
-      <ThemeToggle />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <div className="app-layout">
-              <MapView reports={reports} />
-              <ReportForm onAddReport={handleAddReport} />
-              {toastMsg && (
-                <Toast message={toastMsg} onClose={() => setToastMsg("")} />
-              )}
-            </div>
-          }
-        />
-        <Route path="/entidad" element={<EntityPanel reports={reports} />} />
-      </Routes>
-    </div>
-  );
+  <div className="min-h-screen bg-fondoClaro text-text dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <Header />
+
+    <Toaster position="top-right" reverseOrder={false} />
+
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <div className="app-layout">
+            <MapView reports={reports} />
+            <ReportForm onAddReport={handleAddReport} />
+          </div>
+        }
+      />
+      <Route path="/entidad" element={<EntityPanel reports={reports} />} />
+    </Routes>
+  </div>
+);
+
 }
 
 export default App;

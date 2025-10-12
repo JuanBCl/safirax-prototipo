@@ -6,6 +6,9 @@ import Home from "./components/Home";
 import EntityPanelWrapper from "./components/EntityPanelWrapper";
 import EntityPanel from "./components/EntityPanel";
 import ReportForm from "./components/ReportForm";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Plan from "./components/Plan";
 import "./styles.css";
 
 createRoot(document.getElementById("root")).render(
@@ -13,11 +16,14 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/app" element={<App />} />
-        <Route path="/mapa" element={<App />} />  {/* 👈 agregado */}
+        <Route path="/app/*" element={<App />} />
+        <Route path="/mapa/*" element={<App />} />
         <Route path="/entidad" element={<EntityPanelWrapper />} />
         <Route path="/entidad" element={<EntityPanel />} />
         <Route path="/reporte" element={<ReportForm />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/plan" element={<Plan />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
