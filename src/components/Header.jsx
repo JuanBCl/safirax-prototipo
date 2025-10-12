@@ -1,4 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+<Link to="/reporte" className="bg-blue-600 text-white px-4 py-2 rounded">
+  📝 Nuevo Reporte
+</Link>
+
 
 export default function Header() {
   const navigate = useNavigate();

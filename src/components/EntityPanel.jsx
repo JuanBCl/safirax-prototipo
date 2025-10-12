@@ -114,9 +114,16 @@ export default function EntityPanel({ reports }) {
               <img
                 src={selectedReport.image}
                 alt="imagen"
-                className="rounded mb-4"
+                className="rounded mb-4 object-cover"
+                style={{
+                  width: "100%",        // ocupa todo el ancho disponible
+                  maxHeight: "200px",   // altura máxima estándar
+                  objectFit: "cover",   // recorta si es necesario pero mantiene proporciones
+                  borderRadius: "8px"
+                }}
               />
             )}
+
             <div className="flex justify-end">
               <button
                 onClick={() => setSelectedReport(null)}

@@ -17,15 +17,7 @@
   },
   {
     "id": 3,
-    "type": "emergencia médica",
-    "description": "Persona desmayada en vía pública, ambulancia en camino",
-    "lat": 4.7103,
-    "lng": -74.0748,
-    "timestamp": "2025-10-11T19:45:00Z"
-  },
-  {
-    "id": 4,
-    "type": "incendio",
+    "type": "desastre natural",
     "description": "Incendio controlado en un establecimiento de comida",
     "lat": 4.7098,
     "lng": -74.0693,
@@ -41,7 +33,7 @@
   },
   {
     "id": 6,
-    "type": "hurto de vehículo",
+    "type": "robo",
     "description": "Motocicleta reportada como robada",
     "lat": 4.7142,
     "lng": -74.0717,
@@ -49,7 +41,7 @@
   },
   {
     "id": 7,
-    "type": "manifestación",
+    "type": "vandalismo",
     "description": "Concentración pacífica en la vía principal",
     "lat": 4.7156,
     "lng": -74.0689,
@@ -65,15 +57,7 @@
   },
   {
     "id": 9,
-    "type": "ruido excesivo",
-    "description": "Fiesta con alto volumen reportada por vecinos",
-    "lat": 4.7107,
-    "lng": -74.0708,
-    "timestamp": "2025-10-11T21:55:00Z"
-  },
-  {
-    "id": 10,
-    "type": "seguridad",
+    "type": "vandalismo",
     "description": "Persona sospechosa merodeando en zona residencial",
     "lat": 4.7095,
     "lng": -74.0731,

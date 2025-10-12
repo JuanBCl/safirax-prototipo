@@ -19,12 +19,6 @@ function Home() {
 
       {/* Botones principales */}
       <div className="flex flex-col sm:flex-row gap-4">
-        <button
-          onClick={() => navigate("/reporte")}
-          className="bg-[#2563EB] text-white px-6 py-3 rounded-xl font-semibold shadow-md hover:bg-[#1E3A8A] transition"
-        >
-          Reportar Alerta
-        </button>
 
         <button
           onClick={() => navigate("/mapa")}
