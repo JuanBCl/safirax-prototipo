@@ -8,6 +8,19 @@ export default function Plan() {
 
   const handleSelectPlan = (plan) => {
     if (plan === "free") {
+      // Actualiza el plan a free si el usuario lo selecciona
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        user.plan = "free";
+        localStorage.setItem("user", JSON.stringify(user));
+
+        // Actualiza la lista de usuarios también
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        const updatedUsers = users.map(u =>
+          u.email === user.email ? { ...u, plan: "free" } : u
+        );
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+      }
       navigate("/app");
     } else {
       setShowModal(true);
@@ -17,8 +30,21 @@ export default function Plan() {
   const handleConfirmPayment = () => {
     setProcessing(true);
 
-    // Simula un tiempo de procesamiento de pago
     setTimeout(() => {
+      // ✅ Actualizar plan a premium
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        user.plan = "premium";
+        localStorage.setItem("user", JSON.stringify(user));
+
+        // ✅ Actualizar en la lista de usuarios
+        const users = JSON.parse(localStorage.getItem("users") || "[]");
+        const updatedUsers = users.map(u =>
+          u.email === user.email ? { ...u, plan: "premium" } : u
+        );
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+      }
+
       setProcessing(false);
       setShowModal(false);
       navigate("/app");

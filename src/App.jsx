@@ -1,14 +1,16 @@
+// App.jsx
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import MapView from "./components/MapView";
 import ReportForm from "./components/ReportForm";
 import Header from "./components/Header";
 import EntityPanel from "./components/EntityPanel";
-import { Toaster } from "react-hot-toast"; // 👈 importamos el Toaster global
+import { Toaster } from "react-hot-toast";
 import "./styles.css";
 
 function App() {
   const [reports, setReports] = useState([]);
+  const [user, setUser] = useState(null); // 👈 Guardaremos aquí la info del usuario
 
   // 📥 Cargar reportes guardados
   useEffect(() => {
@@ -20,6 +22,16 @@ function App() {
         .then((res) => res.json())
         .then(setReports)
         .catch((err) => console.error("Error cargando reportes:", err));
+    }
+  }, []);
+
+  // 📌 Verificar usuario logueado
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      setUser(null);
     }
   }, []);
 
@@ -36,26 +48,25 @@ function App() {
   };
 
   return (
-  <div className="min-h-screen bg-fondoClaro text-text dark:bg-gray-900 dark:text-white transition-colors duration-300">
-    <Header />
+    <div className="min-h-screen bg-fondoClaro text-text dark:bg-gray-900 dark:text-white transition-colors duration-300">
+      <Header />
+      <Toaster position="top-right" reverseOrder={false} />
 
-    <Toaster position="top-right" reverseOrder={false} />
-
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="app-layout">
-            <MapView reports={reports} />
-            <ReportForm onAddReport={handleAddReport} />
-          </div>
-        }
-      />
-      <Route path="/entidad" element={<EntityPanel reports={reports} />} />
-    </Routes>
-  </div>
-);
-
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="app-layout">
+              <MapView reports={reports} />
+              {/* 👇 Solo mostrar formulario si el usuario está logueado */}
+              {user && <ReportForm onAddReport={handleAddReport} />}
+            </div>
+          }
+        />
+        <Route path="/entidad" element={<EntityPanel reports={reports} />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

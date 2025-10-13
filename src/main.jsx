@@ -9,6 +9,7 @@ import ReportForm from "./components/ReportForm";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Plan from "./components/Plan";
+import Perfil from "./components/Perfil";
 import "./styles.css";
 
 createRoot(document.getElementById("root")).render(
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/plan" element={<Plan />} />
+        <Route path="/perfil" element={<Perfil />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
